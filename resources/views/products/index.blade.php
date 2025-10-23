@@ -1,13 +1,4 @@
-<x-layout>
 
-    <x-slot:title>
-
-        Custom Title
-
-    </x-slot>
-
- 
-</x-layout>
 <ul>
     @foreach ($allProducts as $product)
         <li>
