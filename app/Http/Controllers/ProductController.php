@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function index() {
         $products = Product::all();
-        return view('products.index');
+        return view('products.index', ['allProducts'=>$products]);
     }
 
     public function create() {
@@ -19,6 +19,7 @@ class ProductController extends Controller
     public function store(Request $request) {
         $data = [
             'name' => $request->name,
+            'quantity' => $request->quantity,
             'description' => $request->description,
         ];
 
@@ -40,5 +41,17 @@ class ProductController extends Controller
     public function edit($id) {
         $product = Product::find($id);
         return view('products.edit', ['singleProduct' => $product]);
+    }
+
+    public function update(Request $request, $id) {
+        $product = Product::find($id);
+        $data = [
+            'name' => $request->name,
+            'quantity' => $request->quantity,
+            'description' => $request->description,
+        ];
+
+        $product->update($data);
+        return redirect('/products/' . $product->id . '/show');
     }
 }
